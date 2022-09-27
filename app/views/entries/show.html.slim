@@ -1,0 +1,37 @@
+- if user_signed_in?
+    p
+        |  Logged in as 
+        strong
+        = current_user.email
+        | . 
+        = link_to 'Edit profile', edit_user_registration_path
+        |  | 
+        = link_to "Logout", destroy_user_session_path, method: :delete
+    h1 
+        |Diary entry
+
+    h2 
+            =@entry.created_at.strftime("%Y-%b-%d")
+            | , 
+            =@entry.feeling
+    p
+        =@entry.body
+
+    br 
+
+    =link_to "Edit Entry", edit_entry_path(@entry)
+
+    br 
+
+    =link_to "Delete Entry", entry_path(@entry),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" }
+
+    br 
+
+    =link_to "Home", root_path
+- else
+    p
+        = link_to "Sign up", new_user_registration_path
+        |  | 
+        = link_to "Login", new_user_session_path

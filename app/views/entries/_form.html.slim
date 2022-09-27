@@ -1,0 +1,15 @@
+=form_with model: @entry do |form|
+
+    br 
+
+    =form.label :feeling
+    =form.select :feeling, options_for_select(Entry.feelings.map { |key, value| [key.titleize, Entry.feelings.key(value)]}, @entry.feeling)
+
+    br 
+
+    =form.label :entry
+    =form.text_area :body
+
+    br 
+
+    =form.submit 

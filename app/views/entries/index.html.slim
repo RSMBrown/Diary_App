@@ -1,0 +1,24 @@
+- if user_signed_in?
+    p
+        |  Logged in as 
+        strong
+        = current_user.email
+        | . 
+        = link_to 'Edit profile', edit_user_registration_path
+        |  | 
+        = link_to "Logout", destroy_user_session_path, method: :delete
+    h1 
+        |Diary entries 
+
+    h2 
+        -@entries.each do |entry|
+            =link_to entry.created_at.strftime("%Y-%b-%d")
+            br
+
+    =link_to "New Entry", new_entry_path(@entry)
+
+- else
+    p
+        = link_to "Sign up", new_user_registration_path
+        |  | 
+        = link_to "Login", new_user_session_path
